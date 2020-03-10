@@ -1,0 +1,27 @@
+{
+  "name": "tylerwiegand/purgecss-with-sage",
+  "type": "package",
+  "description": "Go through the database and create a file that PurgeCSS can read with Sage 10.",
+  "license": "MIT",
+  "authors": [
+    {
+      "name": "Tyler Wiegand",
+      "email": "tylerwiegand@me.com"
+    }
+  ],
+  "autoload": {
+    "psr-4": {
+      "tylerwiegand\\PurgecssWithSage\\": "src/"
+    }
+  },
+  "extra": {
+    "acorn": {
+      "providers": [
+        "tylerwiegand\\PurgecssWithSage\\Providers\\PurgecssWithSageServiceProvider"
+      ]
+    }
+  },
+  "require": {
+    "php": ">=7.2"
+  }
+}
