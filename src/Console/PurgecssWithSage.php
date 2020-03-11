@@ -43,16 +43,29 @@ class PurgecssWithSage extends Command {
         foreach($posts as $post) {
             preg_match_all('/(?:"className":)(?:\s|)(?:")([\d\w\s\-:]*)(?:")/m', $post->post_content, $matches);
             if(isset($matches[ 1 ])) {
-                $classArray[] = $matches[1];
+                $classArray[] = $matches[ 1 ];
+            }
+        }
+
+        if(class_exists('GFAPI')) {
+            $forms = \GFAPI::get_forms();
+            if(is_iterable($forms) && !empty($forms)) {
+                foreach($forms as $form) {
+                    if(is_array($form[ 'fields' ]) && isset($form[ 'fields' ]) && !empty($form[ 'fields' ])) {
+                        foreach($form[ 'fields' ] as $field) {
+                            $classArray[] = explode(" ", $field[ 'cssClass' ]);
+                        }
+                    }
+                }
             }
         }
 
         $classArray = Arr::flatten($classArray);
         $classArray = array_unique($classArray);
-        $classes = implode(" ", $classArray);
+        $classes    = implode(" ", $classArray);
 
         $filename = 'classes.blade.php';
-        $path = get_theme_file_path('resources/views/vendor/purgecss-with-sage/');
+        $path     = get_theme_file_path('resources/views/vendor/purgecss-with-sage/');
 
         if(!is_dir($path)) {
             mkdir($path, 0755, true);

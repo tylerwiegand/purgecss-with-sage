@@ -12,14 +12,27 @@ Configuration of output location is not available at this time.
 ## Installation
 
 ```bash
+# /web/app/themes/sage
+
 $ composer require tylerwiegand/purgecss-with-sage
 ```
 
 ## Usage
 
 ```bash
+# web/app/themes/sage
+
 wp acorn purgecss-with-sage
 ```
+
+I'd also personally recommend a .gitignore addition of the generated file in Sage's .gitignore file:
+```
+# web/app/themes/sage/.gitignore
+
+/resources/views/vendor/purgecss-with-sage/classes.blade.php
+```
+
+As of 1.1 it will also search the cssClass set in a GravityForm field if the plugin is active.
 
 ## Bug Reports
 
